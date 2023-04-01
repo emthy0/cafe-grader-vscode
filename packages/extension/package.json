@@ -30,7 +30,7 @@
         {
           "id": "ez-cafe-grader-sidebar-view",
           "title": "Mydfasdf Extension",
-          "icon": "./assets/icon.svg"
+          "icon": "../../shared/assets/icon.svg"
         }
       ]
     },
@@ -40,7 +40,7 @@
           "type": "webview",
           "id": "ez-cafe-grader-sidebar",
           "name": "Control panel",
-          "icon": "./assets/icon.svg",
+          "icon": "../../shared/assets/icon.svg",
           "contextualTitle": "Cafe Grader"
         }
       ]
@@ -52,7 +52,7 @@
     "start:webview": "cd webview && pnpm run dev",
     "build:webview": "cd webview && pnpm run build",
     "dev": "webpack --watch",
-    "watch": "pnpm -r -parallel  run dev",
+    "watch": "webpack --watch",
     "package": "webpack --mode production --devtool hidden-source-map",
     "compile-tests": "tsc -p . --outDir out",
     "watch-tests": "tsc -p . -w --outDir out",
@@ -72,7 +72,7 @@
     "glob": "^8.1.0",
     "mocha": "^10.2.0",
     "ts-loader": "^9.4.2",
-    "typescript": "^4.9.5",
+    "typescript": "^5.0.3",
     "webpack": "^5.76.3",
     "webpack-cli": "^5.0.1"
   },
@@ -80,4 +80,3 @@
     "@vscode/webview-ui-toolkit": "^1.2.2"
   }
 }
-
