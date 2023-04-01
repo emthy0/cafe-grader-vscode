@@ -1,0 +1,18 @@
+{
+  "name": "ez-cafe-grader",
+  "displayName": "ez-grader",
+  "description": "Integrate cafe grader to vscode for ez workin",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.77.0"
+  },
+  "scripts": {
+    "vscode:prepublish": "pnpm - run package",
+    "compile": "webpack",
+    "dev": "pnpm -r -parallel  run dev",
+    "watch": "pnpm -r -parallel  run watch",
+    "package": "webpack --mode production --devtool hidden-source-map"
+  },
+  "packageManager": "pnpm@8.1.0"
+}
+

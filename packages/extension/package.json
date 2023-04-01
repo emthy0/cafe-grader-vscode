@@ -1,0 +1,83 @@
+{
+  "name": "ez-cafe-grader",
+  "displayName": "ez-grader",
+  "description": "Integrate cafe grader to vscode for ez workin",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.77.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onView:myextension-sidebar"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "ez-cafe-grader.helloWorld",
+        "title": "Hello World"
+      },
+      {
+        "command": "ez-cafe-grader.askquestion",
+        "category": "MyExtension",
+        "title": "Ask question"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "ez-cafe-grader-sidebar-view",
+          "title": "Mydfasdf Extension",
+          "icon": "./assets/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "ez-cafe-grader-sidebar-view": [
+        {
+          "type": "webview",
+          "id": "ez-cafe-grader-sidebar",
+          "name": "Control panel",
+          "icon": "./assets/icon.svg",
+          "contextualTitle": "Cafe Grader"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "pnpm run package",
+    "compile": "webpack",
+    "start:webview": "cd webview && pnpm run dev",
+    "build:webview": "cd webview && pnpm run build",
+    "dev": "webpack --watch",
+    "watch": "pnpm -r -parallel  run dev",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "pnpm run compile-tests && pnpm run compile && pnpm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "@types/vscode": "^1.77.0",
+    "@typescript-eslint/eslint-plugin": "^5.56.0",
+    "@typescript-eslint/parser": "^5.56.0",
+    "@vscode/test-electron": "^2.3.0",
+    "eslint": "^8.36.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.2.0",
+    "ts-loader": "^9.4.2",
+    "typescript": "^4.9.5",
+    "webpack": "^5.76.3",
+    "webpack-cli": "^5.0.1"
+  },
+  "dependencies": {
+    "@vscode/webview-ui-toolkit": "^1.2.2"
+  }
+}
+
