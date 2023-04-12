@@ -6,10 +6,8 @@
   "engines": {
     "vscode": "^1.77.0"
   },
-  "categories": [
-    "Other"
-  ],
-  "activationEvents": [],
+  "categories": ["Other"],
+  "activationEvents": ["onView:ez-cafe-grader-sidebar"],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [

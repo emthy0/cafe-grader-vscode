@@ -1,6 +1,6 @@
-import * as vscode from "vscode"
+import vscode = require("vscode")
 
-export class PrimaryPanel {
+class PrimaryPanel {
   public static currentPanel: PrimaryPanel | undefined
   private readonly _panel: vscode.WebviewPanel
   private _disposables: vscode.Disposable[] = []
@@ -57,4 +57,8 @@ export class PrimaryPanel {
       </html>
     `
   }
+}
+
+export = {
+  PrimaryPanel,
 }

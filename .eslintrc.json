@@ -7,7 +7,23 @@
   },
   "plugins": ["@typescript-eslint"],
   "rules": {
-    "@typescript-eslint/naming-convention": "warn",
+    "@typescript-eslint/naming-convention": [
+      "warn",
+      {
+        "selector": "default",
+        "format": ["camelCase"],
+        "leadingUnderscore": "allow",
+        "trailingUnderscore": "allow"
+      },
+      {
+        "selector": ["class"],
+        "format": ["PascalCase"]
+      },
+      {
+        "selector": ["objectLiteralProperty"],
+        "format": ["camelCase", "PascalCase"]
+      }
+    ],
     "@typescript-eslint/no-extra-semi": "error",
     "@typescript-eslint/semi": "off",
     "curly": "warn",

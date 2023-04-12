@@ -1,6 +1,6 @@
-import * as vscode from "vscode"
+import vscode = require("vscode")
 
-export class SidebarProvider implements vscode.WebviewViewProvider {
+class SidebarProvider implements vscode.WebviewViewProvider {
   _view?: vscode.WebviewView
   _doc?: vscode.TextDocument
 
@@ -8,12 +8,14 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
 
   public resolveWebviewView(webviewView: vscode.WebviewView) {
     this._view = webviewView
-
     webviewView.webview.options = {
       // Allow scripts in the webview
       enableScripts: true,
 
-      localResourceRoots: [this._extensionUri],
+      localResourceRoots: [
+        this._extensionUri,
+        vscode.Uri.joinPath(this._extensionUri, "../../packages/webview"),
+      ],
     }
 
     webviewView.webview.html = this._getHtmlForWebview(webviewView.webview)
@@ -48,18 +50,28 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
   }
 
   private _getHtmlForWebview(webview: vscode.Webview) {
-    const styleResetUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, "media", "reset.css")
-    )
-    const styleVSCodeUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, "media", "vscode.css")
-    )
+    // const styleResetUri = webview.asWebviewUri(
+    //   vscode.Uri.joinPath(this._extensionUri, "media", "reset.css")
+    // )
+    // const styleVSCodeUri = webview.asWebviewUri(
+    //   vscode.Uri.joinPath(this._extensionUri, "media", "vscode.css")
+    // )
     const scriptUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, "out", "compiled/sidebar.js")
+      vscode.Uri.joinPath(
+        this._extensionUri,
+        "../../packages/webview/build",
+        "bundle.iife.js"
+      )
     )
     const styleMainUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, "out", "compiled/sidebar.css")
+      vscode.Uri.joinPath(
+        this._extensionUri,
+        "../../packages/webview/build",
+        "style.css"
+      )
     )
+
+    console.log("--------- ", scriptUri)
 
     // Use a nonce to only allow a specific script to be run.
     const nonce = getNonce()
@@ -74,8 +86,6 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
         -->
         <meta http-equiv="Content-Security-Policy" content="img-src https: data:; style-src 'unsafe-inline' ${webview.cspSource}; script-src 'nonce-${nonce}';">
 				<meta name="viewport" content="width=device-width, initial-scale=1.0">
-				<link href="${styleResetUri}" rel="stylesheet">
-				<link href="${styleVSCodeUri}" rel="stylesheet">
                 <link href="${styleMainUri}" rel="stylesheet">
                 <script nonce="${nonce}">
                     const tsvscode = acquireVsCodeApi();
@@ -83,6 +93,9 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
 
 			</head>
             <body>
+            <ul class="color-list">
+				</ul>
+				<button class="add-color-button">Add Color</button>
 				<script nonce="${nonce}" src="${scriptUri}"></script>
 			</body>
 			</html>`
@@ -97,4 +110,8 @@ function getNonce() {
     text += possible.charAt(Math.floor(Math.random() * possible.length))
   }
   return text
+}
+
+export = {
+  SidebarProvider,
 }

@@ -1,12 +1,11 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
-import * as vscode from "vscode"
-import { PrimaryPanel } from "./panels/PrimaryPanel"
-import { SidebarProvider } from "./panels/SidebarProvider"
+import vscode = require("vscode")
+import Sidebar = require("./panels/SidebarProvider")
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
-export function activate(context: vscode.ExtensionContext) {
+function activate(context: vscode.ExtensionContext) {
   // Use the console to output diagnostic information (console.log) and errors (console.error)
   // This line of code will only be executed once when your extension is activated
   console.log(
@@ -14,10 +13,10 @@ export function activate(context: vscode.ExtensionContext) {
   )
 
   // Register the Sidebar Panel
-  const sidebarProvider = new SidebarProvider(context.extensionUri)
+  const sidebarProvider = new Sidebar.SidebarProvider(context.extensionUri)
   context.subscriptions.push(
     vscode.window.registerWebviewViewProvider(
-      "myextension-sidebar",
+      "ez-cafe-grader-sidebar",
       sidebarProvider
     )
   )
@@ -51,5 +50,9 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 // This method is called when your extension is deactivated
-export function deactivate() {}
+function deactivate() {}
 
+export = {
+  activate,
+  deactivate,
+}

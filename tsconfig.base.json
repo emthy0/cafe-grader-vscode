@@ -4,7 +4,7 @@
     "rootDir": ".",
     "sourceMap": true,
     "declaration": false,
-    "moduleResolution": "node",
+    "moduleResolution": "nodenext",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@assets": ["./shared/assets"]
-    }
+    },
+    "verbatimModuleSyntax": true
   },
   "exclude": ["node_modules", "tmp"]
 }
